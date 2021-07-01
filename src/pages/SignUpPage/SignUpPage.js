@@ -19,7 +19,7 @@ const SignUpPage = () => {
         type={"submit"}
         variant={"text"}
         color={"primary"}
-        /* onClick={() => goToPreviousPage(history)} */
+        onClick={() => goToPreviousPage(history)}
       >
         Back
       </Button>

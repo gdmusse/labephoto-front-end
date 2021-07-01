@@ -3,44 +3,43 @@ import GlobalStateContext from "../../global/GlobalStateContext";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import { StyledToolbar } from "./styled";
-/* import { goToFeed, goToLogin } from "../../routes/coordinator"; */
+import { goToFeed, goToLogin } from "../../routes/coordinator";
 import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const history = useHistory();
-  const { rightButtonText, setRightButtonText, token } = useContext(
-    GlobalStateContext
-  );
+  const { rightButtonText, setRightButtonText, token } =
+    useContext(GlobalStateContext);
 
   const logout = () => {
     localStorage.removeItem("token");
   };
 
-/*   const rightButtonAction = () => {
+  const rightButtonAction = () => {
     if (token) {
       logout();
       setRightButtonText("Login");
-       goToLogin(history); 
+      goToLogin(history);
     } else {
-       goToLogin(history); 
+      goToLogin(history);
     }
   };
- */
-/*   useEffect(() => {
+
+  useEffect(() => {
     if (token) {
       setRightButtonText("Logout");
     } else {
       setRightButtonText("Login");
     }
-  }, [token, setRightButtonText]); */
+  }, [token, setRightButtonText]);
 
   return (
     <AppBar position="static">
       <StyledToolbar>
-        <Button /* onClick={() => goToFeed(history)} */ color="inherit">
+        <Button onClick={() => goToFeed(history)} color="inherit">
           LabePhoto
         </Button>
-        <Button /* onClick={rightButtonAction} */ color="inherit">
+        <Button onClick={rightButtonAction} color="inherit">
           {rightButtonText}
         </Button>
       </StyledToolbar>

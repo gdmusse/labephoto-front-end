@@ -8,9 +8,9 @@ const GlobalState = (props) => {
   const token = localStorage.getItem("token");
   const [rightButtonText, setRightButtonText] = useState("");
   const [loading, setLoading] = useState("");
-  const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [photos, setPhotos] = useState([]);
+/*   const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10); */
 
   return (
     <GlobalStateContext.Provider
@@ -26,12 +26,12 @@ const GlobalState = (props) => {
         token,
         loading,
         setLoading,
-        posts,
-        setPosts,
-        currentPage,
+        photos,
+        setPhotos,
+/*         currentPage,
         setCurrentPage,
         postsPerPage,
-        setPostsPerPage,
+        setPostsPerPage, */
       }}
     >
       {props.children}
