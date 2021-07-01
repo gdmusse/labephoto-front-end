@@ -9,7 +9,7 @@ const useProtectedPage = () => {
     const token = window.localStorage.getItem("token");
 
     if (!token) {
-/*       goToLogin(history); */
+      goToLogin(history);
     }
   }, [history]);
 };

@@ -30,10 +30,3 @@ export const SignUpButtonContainer = styled.div`
   width: 80vw;
   max-width: 450px;
 `;
-
-export const LogoImage = styled.img`
-  width: 70vw;
-  max-width: 350px;
-  margin-bottom: 20px;
-  transform: translateZ(0);
-`;

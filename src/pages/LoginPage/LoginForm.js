@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { InputsContainer, SignUpFormContainer } from "./styled";
+import React, { useContext, useEffect } from "react";
+import { InputsContainer, LoginFormContainer } from "./styled";
 import TextField from "@material-ui/core/TextField";
 import useForm from "../../hooks/useForm";
 import Button from "@material-ui/core/Button";
@@ -11,12 +11,10 @@ import GlobalStateContext from "../../global/GlobalStateContext";
 import Loader from "../../components/Loader";
 import { withStyles } from "@material-ui/core";
 
-const SignUpForm = () => {
+const LoginForm = () => {
   const history = useHistory();
   const [form, onChange, clear] = useForm({
-    name: "",
-    nickname: "",
-    email: "",
+    nicknameOrEmail: "",
     password: "",
   });
 
@@ -25,22 +23,31 @@ const SignUpForm = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    signUp(form, clear, history);
+
+    let body = form.nicknameOrEmail.includes("@")
+      ? {
+          email: form.nicknameOrEmail,
+          password: form.password,
+        }
+      : {
+          nickname: form.nicknameOrEmail,
+          password: form.password,
+        };
+
+    login(body, clear, history);
     setLoading(true);
   };
 
-
-
-
-  const signUp = (body, clear, history) => {
+  const login = (body, clear, history) => {
     setLoading(true);
+
     axios
-      .post(`${BASE_URL}/user/signup`, body)
+      .post(`${BASE_URL}/user/login`, body)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         clear();
         setLoading(false);
-            goToFeed(history); 
+        goToFeed(history);
       })
       .catch((err) => {
         setLoading(false);
@@ -50,45 +57,27 @@ const SignUpForm = () => {
       });
   };
 
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   return (
-    <SignUpFormContainer>
+    <LoginFormContainer>
       {loading ? (
         <Loader />
       ) : (
         <form onSubmit={onSubmitForm}>
           <InputsContainer>
             <TextField
-              name={"name"}
-              value={form.name}
+              name={"nicknameOrEmail"}
+              value={form.nicknameOrEmail}
               onChange={onChange}
-              label={"Name"}
+              label={"Nickname or Email"}
               variant={"outlined"}
               fullWidth
               margin={"normal"}
               required
               autoFocus
-            />
-            <TextField
-              name={"nickname"}
-              value={form.nickname}
-              onChange={onChange}
-              label={"Nickname"}
-              variant={"outlined"}
-              fullWidth
-              margin={"normal"}
-              required
-              autoFocus
-            />
-            <TextField
-              name={"email"}
-              value={form.email}
-              onChange={onChange}
-              label={"E-mail"}
-              variant={"outlined"}
-              fullWidth
-              margin={"normal"}
-              required
-              type={"email"}
             />
             <TextField
               name={"password"}
@@ -102,7 +91,11 @@ const SignUpForm = () => {
               type={"password"}
               InputProps={{ inputProps: { minLength: 6 } }}
               error={form.password.length < 6}
-              helperText={form.password.length < 6 ? 'Password must be at least 6 characters' : ' '}
+              helperText={
+                form.password.length < 6
+                  ? "Password must be at least 6 characters"
+                  : " "
+              }
             />
           </InputsContainer>
           <Button
@@ -111,12 +104,12 @@ const SignUpForm = () => {
             variant={"contained"}
             color={"primary"}
           >
-            Sign Up
+            Login
           </Button>
         </form>
       )}
-    </SignUpFormContainer>
+    </LoginFormContainer>
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
