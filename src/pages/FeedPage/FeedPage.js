@@ -7,6 +7,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import { ScreenContainer } from "./styled";
 import PhotoCard from "../../components/PhotoCard/PhotoCard";
 import Loader from "../../components/Loader";
+import TransitionsModal from "../../components/Modal";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -19,34 +20,53 @@ const FeedPage = () => {
     setAlertMsg,
     setAlertSeverity,
     setOpenAlert,
+    setOpenModal,
+    setModalInfo,
+    modalInfo,
   } = useContext(GlobalStateContext);
 
   useEffect(() => {
     setLoading(true);
-    console.log("photos", photos);
-    axios
-      .get(`${BASE_URL}/photo/all`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        setPhotos(res.data.photos);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      })
-      .then(() => {
-        setLoading(false);
-      });
-  }, [setPhotos]);
+    getPhotos();
+  }, []);
+
+  const getPhotos = async () => {
+    try {
+      await axios
+        .get(`${BASE_URL}/photo/all`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setPhotos(res.data.photos);
+        });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onClickModal = (id) => {
+    setOpenModal(true);
+    setModalInfo(id);
+  };
 
   const photoCards = photos.map((photo) => {
-    return <PhotoCard key={photo.id} title={photo.subtitle} />;
+    return (
+      <PhotoCard
+        key={photo.id}
+        subtitle={photo.subtitle}
+        image={photo.file}
+        onClickCard={() => onClickModal(photo.id)}
+      />
+    );
   });
 
   return (
     <ScreenContainer>
+      <TransitionsModal />
       {loading ? <Loader /> : <div>{photoCards}</div>}
     </ScreenContainer>
   );

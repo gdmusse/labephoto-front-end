@@ -7,7 +7,7 @@ export const goToFeed = (history) => {
 };
 
 export const goToLogin = (history) => {
-  history.push("/login");
+  history.replace("/login");
 };
 
 export const goToPreviousPage = (history) => {
