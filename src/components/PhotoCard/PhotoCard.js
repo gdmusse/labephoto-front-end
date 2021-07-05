@@ -7,32 +7,23 @@ import {
   LeftContent,
   RightContent,
 } from "./styled";
-
+import { CardMedia } from "@material-ui/core";
 
 const PhotoCard = (props) => {
   return (
     <PostCardContainer>
       <PostCardContent>
-        <LeftContent>
-          <Typography align="center" variant="h6">
-            {props.votesCount}
+        <CardActionArea onClick={props.onClickCard}>
+        <CardMedia
+          component="img"
+          alt={props.subtitle}
+          height="140"
+          image={props.image}
+        />
+
+          <Typography gutterBottom variant="h4">
+            {props.subtitle}
           </Typography>
-        </LeftContent>
-        <CardActionArea>
-          <RightContent onClick={props.onClickCard}>
-            <Typography gutterBottom variant="h4">
-              {props.title}
-            </Typography>
-            <Typography gutterBottom variant="subtitle1">
-              {props.text}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              by {props.username} at {props.createdAt}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {props.commentsCount} comments
-            </Typography>
-          </RightContent>
         </CardActionArea>
       </PostCardContent>
     </PostCardContainer>
