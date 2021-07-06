@@ -2,19 +2,18 @@ import styled from "styled-components";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-export const PostCardContainer = styled(Card)`
+export const ModalCardContainer = styled(Card)`
   width: 60vw;
-  margin: 5%;
+  overflow-x: hidden;
   @media screen and (max-width: 992px) {
     width: 80vw;
   }
-
   @media screen and (max-width: 600px) {
     width: 90vw;
   }
 `;
 
-export const PostCardContent = styled(CardContent)`
+export const ModalCardContent = styled(CardContent)`
   display: flex;
   min-height: 10vh;
   background-color: #f2f2f2;
@@ -22,8 +21,3 @@ export const PostCardContent = styled(CardContent)`
     padding: 10px;
   }
 `;
-export const LeftContent = styled.div`
-  margin-right: 5%;
-  margin-top: 4px;
-`;
-export const RightContent = styled.div``;

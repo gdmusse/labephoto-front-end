@@ -4,10 +4,13 @@ import { useHistory } from "react-router-dom";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import BASE_URL from "../../constants/urls";
 import useProtectedPage from "../../hooks/useProtectedPage";
-import { ScreenContainer } from "./styled";
+import { ScreenContainer, AddPostButton } from "./styled";
 import PhotoCard from "../../components/PhotoCard/PhotoCard";
 import Loader from "../../components/Loader";
 import TransitionsModal from "../../components/Modal";
+import { goToCreatePhotoPage, goToLogin } from "../../routes/coordinator";
+import AlertModified from "../../components/Alert";
+import { Add } from "@material-ui/icons";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -42,7 +45,12 @@ const FeedPage = () => {
           setPhotos(res.data.photos);
         });
     } catch (err) {
-      console.log(err);
+      if (err.response.data.error.includes("jwt expired")) {
+        setAlertMsg(err.response.data.error);
+        setAlertSeverity("error");
+        setOpenAlert(true);
+        goToLogin(history);
+      }
     } finally {
       setLoading(false);
     }
@@ -67,7 +75,14 @@ const FeedPage = () => {
   return (
     <ScreenContainer>
       <TransitionsModal />
+      <AlertModified/>
       {loading ? <Loader /> : <div>{photoCards}</div>}
+      <AddPostButton
+        color={"primary"}
+        onClick={() => goToCreatePhotoPage(history)}
+      >
+        <Add />
+      </AddPostButton>
     </ScreenContainer>
   );
 };

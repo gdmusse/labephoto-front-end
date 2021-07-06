@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png";
 import SignUpForm from "./SignUpForm";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import AlertModified from "../../components/Alert";
-import { goToPreviousPage } from "../../routes/coordinator";
+import { goToLogin, goToPreviousPage } from "../../routes/coordinator";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const SignUpPage = () => {
         type={"submit"}
         variant={"text"}
         color={"primary"}
-        onClick={() => goToPreviousPage(history)}
+        onClick={() => goToLogin(history)}
       >
         Back
       </Button>
