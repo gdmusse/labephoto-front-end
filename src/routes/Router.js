@@ -6,9 +6,11 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 
 import Header from "../components/Header/Header.js";
 
+import CreatePhotoPage from "../pages/CreatePostPage/CreatePhotoPage";
+
 /*
 import PostPage from "../pages/PostPage/PostPage"; 
-import CreatePostPage from "../pages/CreatePostPage/CreatePostPage";
+
 
 
  import ErrorPage from "../pages/ErrorPage/ErrorPage"; */
@@ -27,13 +29,14 @@ const Router = () => {
         <Route exact path="/">
           <FeedPage />
         </Route>
+        <Route exact path="/createphoto">
+          <CreatePhotoPage />
+        </Route>
         {/*         
         <Route exact path="/post/:id">
           <PostPage />
         </Route>
-        <Route exact path="/createpost">
-          <CreatePostPage />
-        </Route>
+      
         <Route>
           <ErrorPage />
         </Route> */}

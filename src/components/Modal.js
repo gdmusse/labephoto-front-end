@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Modal from "@material-ui/core/Modal";
-
+import DialogContent from '@material-ui/core/DialogContent';
 import GlobalStateContext from "../global/GlobalStateContext";
 import BASE_URL from "../constants/urls";
 import axios from "axios";
-
+import styled from "styled-components"
 import ModalCard from "./ModalCard/ModalCard";
 import dayjs from "dayjs";
 import Loader from "./Loader"
@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     width: "60vw",
   },
 }));
+
+const LoaderDiv = styled.div`
+margin-top: 30vh;
+overflow-x: hidden;
+` 
 
 const TransitionsModal = () => {
   const classes = useStyles();
@@ -82,7 +87,8 @@ const TransitionsModal = () => {
   return (
     <div>
       <Modal open={openModal} onClose={handleClose}>
-        {loadingModal ? <Loader/>: body}
+        <DialogContent> {loadingModal ? <LoaderDiv> <Loader/> </LoaderDiv>: body} </DialogContent>
+        
       </Modal>
     </div>
   );

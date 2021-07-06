@@ -1,53 +1,45 @@
 import React from "react";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
-import {
-  PostCardContainer,
-  PostCardContent,
-  LeftContent,
-  RightContent,
-} from "./styled";
+import { ModalCardContainer, ModalCardContent } from "./styled";
 import { CardMedia } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    objectFit: 'scale-down'
-  }
+    objectFit: "scale-down",
+  },
 }));
-
-
 
 const ModalCard = (props) => {
   const classes = useStyles();
   return (
-    <PostCardContainer>
-      <PostCardContent>
+    <ModalCardContainer>
+      <ModalCardContent>
         <CardActionArea>
-        <CardMedia
-          component="img"
-          alt={props.subtitle}
-          height="300"
-          image={props.image}
-          className={classes.media}
-        />
-          <Typography gutterBottom variant="h4">
+          <CardMedia
+            component="img"
+            alt={props.subtitle}
+            height="400"
+            image={props.image}
+            className={classes.media}
+          />
+          <Typography gutterBottom variant="h4" align="center">
             {props.subtitle}
           </Typography>
-          <Typography gutterBottom variant="h6">
+          <Typography gutterBottom variant="h6" align="center">
             by {props.author} at {props.createdAt}
           </Typography>
 
-          <Typography gutterBottom variant="h5">
+          <Typography gutterBottom variant="h5" align="center">
             tags: {props.tags}
           </Typography>
-          <Typography gutterBottom variant="h5">
+          <Typography gutterBottom variant="h5" align="center">
             collection: {props.collection}
           </Typography>
-
         </CardActionArea>
-      </PostCardContent>
-    </PostCardContainer>
+      </ModalCardContent>
+    </ModalCardContainer>
   );
 };
 

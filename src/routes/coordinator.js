@@ -14,14 +14,9 @@ export const goToPreviousPage = (history) => {
   history.goBack();
 };
 
-/* 
-export const goToCreatePostPage = (history) => {
-  history.replace("/createpost");
-};
 
-export const goToPostPage = (history, id) => {
-  history.push(`/post/${id}`);
+export const goToCreatePhotoPage = (history) => {
+  history.replace("/createphoto");
 };
 
 
- */
