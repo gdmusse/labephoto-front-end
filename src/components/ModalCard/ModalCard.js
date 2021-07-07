@@ -7,7 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    objectFit: "scale-down",
+    objectFit: "contain",
+    height: "400",
+    ["@media (max-width: 600px)"]: { height: "300px" },
   },
 }));
 
@@ -20,7 +22,6 @@ const ModalCard = (props) => {
           <CardMedia
             component="img"
             alt={props.subtitle}
-            height="400"
             image={props.image}
             className={classes.media}
           />

@@ -60,22 +60,26 @@ const FeedPage = () => {
     setOpenModal(true);
     setModalInfo(id);
   };
-
-  const photoCards = photos.map((photo) => {
-    return (
-      <PhotoCard
-        key={photo.id}
-        subtitle={photo.subtitle}
-        image={photo.file}
-        onClickCard={() => onClickModal(photo.id)}
-      />
-    );
-  });
-
+console.log("before", photos)
+  const photoCards = photos
+    .sort((a, b) => {
+      return b.date - a.date;
+    })
+    .map((photo) => {
+      return (
+        <PhotoCard
+          key={photo.id}
+          subtitle={photo.subtitle}
+          image={photo.file}
+          onClickCard={() => onClickModal(photo.id)}
+        />
+      );
+    });
+    console.log("after", photos)
   return (
     <ScreenContainer>
       <TransitionsModal />
-      <AlertModified/>
+      <AlertModified />
       {loading ? <Loader /> : <div>{photoCards}</div>}
       <AddPostButton
         color={"primary"}
