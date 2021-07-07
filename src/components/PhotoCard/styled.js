@@ -12,6 +12,7 @@ export const PhotoCardContainer = styled(Card)`
 
   @media screen and (max-width: 600px) {
     width: 90vw;
+    height: 50vh;
   }
 `;
 

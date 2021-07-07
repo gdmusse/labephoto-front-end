@@ -18,6 +18,19 @@ const TagContainer = styled.div`
   align-items: center;
 `;
 
+const ImgPreviewContainer = styled.div`
+height: 150px;
+width: 150px;
+border: 2px solid black;
+display: flex;
+overflow: hidden;
+justify-content: center;
+`
+
+const ImgPreview = styled.img`
+object-fit: scale-down;
+
+`
 const useStyles = makeStyles((theme) => ({
   button: {
     position: "relative",
@@ -126,6 +139,8 @@ const CreatePhotoForm = () => {
               required
               autoFocus
             />
+            <ImgPreviewContainer> <ImgPreview src={form.file}/></ImgPreviewContainer>
+           
             <TagContainer>
               <TextField
                 name={"tags"}

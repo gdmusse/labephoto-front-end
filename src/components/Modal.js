@@ -2,27 +2,41 @@ import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Modal from "@material-ui/core/Modal";
-import DialogContent from '@material-ui/core/DialogContent';
+import DialogContent from "@material-ui/core/DialogContent";
 import GlobalStateContext from "../global/GlobalStateContext";
 import BASE_URL from "../constants/urls";
 import axios from "axios";
-import styled from "styled-components"
+import styled from "styled-components";
 import ModalCard from "./ModalCard/ModalCard";
 import dayjs from "dayjs";
-import Loader from "./Loader"
+import Loader from "./Loader";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     left: "20vw",
     top: "10vh",
     width: "60vw",
+    paddingRight: 0,
+    ["@media (max-width: 900px)"]: { left: "10vw" },
+    ["@media (max-width: 600px)"]: { left: "5vw" },
   },
 }));
 
 const LoaderDiv = styled.div`
-margin-top: 30vh;
-overflow-x: hidden;
-` 
+  margin-top: 30vh;
+  overflow-x: hidden;
+  padding-right: 0;
+`;
+
+const ScreenContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  margin-top: 5vh;
+  overflow-x: hidden;
+`;
 
 const TransitionsModal = () => {
   const classes = useStyles();
@@ -49,7 +63,7 @@ const TransitionsModal = () => {
     if (id) {
       setLoadingModal(true);
       try {
-       await axios
+        await axios
           .get(`${BASE_URL}/photo/${id}`, {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -58,7 +72,7 @@ const TransitionsModal = () => {
           .then((res) => {
             setPhoto(res.data.photo[0]);
             setPhotoDate(dayjs(photo.date).format("DD/MM/YYYY"));
-            setLoadingModal(false)
+            setLoadingModal(false);
           });
       } catch (err) {
         console.log(err);
@@ -85,12 +99,21 @@ const TransitionsModal = () => {
   );
 
   return (
-    <div>
-      <Modal open={openModal} onClose={handleClose}>
-        <DialogContent> {loadingModal ? <LoaderDiv> <Loader/> </LoaderDiv>: body} </DialogContent>
-        
+    <ScreenContainer>
+      <Modal open={openModal} onClose={handleClose} disableScrollLock={true}>
+        <DialogContent disableScrollLock={true}>
+          {" "}
+          {loadingModal ? (
+            <LoaderDiv>
+              {" "}
+              <Loader />{" "}
+            </LoaderDiv>
+          ) : (
+            body
+          )}{" "}
+        </DialogContent>
       </Modal>
-    </div>
+    </ScreenContainer>
   );
 };
 

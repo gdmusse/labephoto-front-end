@@ -14,6 +14,9 @@ const spin = keyframes`
 const LogoImg = styled.img`
   animation: ${spin} 2s linear infinite;
   width: 10vw;
+  @media screen and (max-width: 992px) {
+    width: 30vw;
+  }
 `;
 
 const Wrapper = styled.div`
