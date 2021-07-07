@@ -19,18 +19,17 @@ const TagContainer = styled.div`
 `;
 
 const ImgPreviewContainer = styled.div`
-height: 150px;
-width: 150px;
-border: 2px solid black;
-display: flex;
-overflow: hidden;
-justify-content: center;
-`
+  height: 150px;
+  width: 150px;
+  border: 2px solid black;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+`;
 
 const ImgPreview = styled.img`
-object-fit: scale-down;
-
-`
+  object-fit: scale-down;
+`;
 const useStyles = makeStyles((theme) => ({
   button: {
     position: "relative",
@@ -132,15 +131,18 @@ const CreatePhotoForm = () => {
               name={"file"}
               value={form.file}
               onChange={onChange}
-              label={"File"}
+              label={"Image url"}
               variant={"outlined"}
               fullWidth
               margin={"normal"}
               required
               autoFocus
             />
-            <ImgPreviewContainer> <ImgPreview src={form.file}/></ImgPreviewContainer>
-           
+            <ImgPreviewContainer>
+              {" "}
+              <ImgPreview src={form.file} />
+            </ImgPreviewContainer>
+
             <TagContainer>
               <TextField
                 name={"tags"}
