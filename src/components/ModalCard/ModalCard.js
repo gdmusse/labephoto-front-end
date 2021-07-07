@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   media: {
     objectFit: "contain",
-    height: "400",
+    height: "350px",
     ["@media (max-width: 600px)"]: { height: "300px" },
   },
 }));
