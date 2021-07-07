@@ -60,7 +60,7 @@ const FeedPage = () => {
     setOpenModal(true);
     setModalInfo(id);
   };
-console.log("before", photos)
+
   const photoCards = photos
     .sort((a, b) => {
       return b.date - a.date;
@@ -75,7 +75,7 @@ console.log("before", photos)
         />
       );
     });
-    console.log("after", photos)
+
   return (
     <ScreenContainer>
       <TransitionsModal />
