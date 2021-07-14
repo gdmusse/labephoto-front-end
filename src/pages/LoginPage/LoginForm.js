@@ -46,7 +46,7 @@ const LoginForm = () => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         clear();
-        setLoading(false);
+
         goToFeed(history);
       })
       .catch((err) => {

@@ -9,7 +9,7 @@ align-items: center;
 margin-bottom: 20px;
 `;
 
-export const CreatePhotoFormContainer = styled.div`
+export const CreateCollectionFormContainer = styled.div`
 display: flex;
 flex-direction: column;
 width: 80vw;
@@ -33,6 +33,7 @@ export const ScreenContainer = styled.div`
   margin: auto;
   flex-direction: column;
 `;
+
 export const TitleDiv = styled.div`
   margin: 2vh 0;
 `;

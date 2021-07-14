@@ -13,4 +13,4 @@ code {
     monospace;
 }
 
-html, body { overflow-y: auto; }
+html, body { overflow-y: auto; overflow-x: hidden;}
