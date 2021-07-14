@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import Fab from "@material-ui/core/Fab";
 
+
 export const ScreenContainer = styled.div`
   display: flex;
+  max-width: 975px;
+  margin-top: 5vh;
+  overflow-x: hidden;
+  margin: auto;
+  flex-direction: column;
+`;
+export const PhotosContainer = styled.div`
+  display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 100vw;
-  margin-top: 5vh;
-  overflow-x: hidden;
 `;
 
-export const AddPostButton = styled(Fab)`
-  position: fixed !important;
-  right: 20px;
-  bottom: 20px;
-  z-index: 3;
-`;
+export const ButtonsContainer = styled.div` 
+display: flex;
+justify-content: center;
+
+`

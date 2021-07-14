@@ -4,13 +4,37 @@ import { useHistory } from "react-router-dom";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import BASE_URL from "../../constants/urls";
 import useProtectedPage from "../../hooks/useProtectedPage";
-import { ScreenContainer, AddPostButton } from "./styled";
+import { ScreenContainer, PhotosContainer,  AddPostButton,
+  ProfileContainer,
+  AddCollectionButton,
+  CollectionButton,
+  ButtonsContainer} from "./styled";
 import PhotoCard from "../../components/PhotoCard/PhotoCard";
 import Loader from "../../components/Loader";
 import TransitionsModal from "../../components/Modal";
-import { goToCreatePhotoPage, goToLogin } from "../../routes/coordinator";
+import { goToLogin,  goToCreatePhotoPage, goToCreateCollectionPage, goToCollectionsPage } from "../../routes/coordinator";
 import AlertModified from "../../components/Alert";
-import { Add } from "@material-ui/icons";
+import { AddAPhoto, AddPhotoAlternate, Collections } from "@material-ui/icons";
+import Button from "@material-ui/core/Button";
+import dayjs from "dayjs";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  buttons: {
+    margin: theme.spacing(1),
+    ["@media (max-width: 600px)"]: { padding: "0"},
+  },
+  middlebutton: {
+    margin: "0px 10px",
+    ["@media (max-width: 600px)"]: { margin: "0px 2px",padding: "5px"},
+  },
+  lastbutton : {
+    ["@media (max-width: 600px)"]: {padding: "15px"},
+  }
+}));
 
 const FeedPage = () => {
   useProtectedPage();
@@ -27,6 +51,8 @@ const FeedPage = () => {
     setModalInfo,
     modalInfo,
   } = useContext(GlobalStateContext);
+
+  const classes = useStyles();
 
   useEffect(() => {
     setLoading(true);
@@ -63,7 +89,9 @@ const FeedPage = () => {
 
   const photoCards = photos
     .sort((a, b) => {
-      return b.date - a.date;
+      const date1 = dayjs(a.date);
+      const date2 = dayjs(b.date);
+      return date2 - date1;
     })
     .map((photo) => {
       return (
@@ -71,6 +99,7 @@ const FeedPage = () => {
           key={photo.id}
           subtitle={photo.subtitle}
           image={photo.file}
+          author={photo.author}
           onClickCard={() => onClickModal(photo.id)}
         />
       );
@@ -78,15 +107,47 @@ const FeedPage = () => {
 
   return (
     <ScreenContainer>
-      <TransitionsModal />
-      <AlertModified />
-      {loading ? <Loader /> : <div>{photoCards}</div>}
-      <AddPostButton
-        color={"primary"}
-        onClick={() => goToCreatePhotoPage(history)}
-      >
-        <Add />
-      </AddPostButton>
+      <ButtonsContainer className={classes.buttons}>
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          onClick={() => goToCreatePhotoPage(history)}
+          disableElevation="true"
+        >
+          <AddAPhoto className={classes.extendedIcon} />
+          Add Photo
+        </Button>
+
+        <Button
+          onClick={() => goToCreateCollectionPage(history)}
+          variant="contained"
+          color="secondary"
+          size="small"
+          disableElevation="true"
+          className={classes.middlebutton}
+        >
+          <AddPhotoAlternate className={classes.extendedIcon} />
+          Add Collection
+        </Button>
+
+        <Button
+          onClick={() => goToCollectionsPage(history)}
+          variant="contained"
+          color="secondary"
+          size="small"
+          disableElevation="true"
+          className={classes.lastbutton}
+        >
+          <Collections className={classes.extendedIcon} />
+          Collections
+        </Button>
+      </ButtonsContainer>
+      <PhotosContainer>
+        <TransitionsModal />
+        <AlertModified />
+        {loading ? <Loader /> : <div>{photoCards}</div>}
+      </PhotosContainer>
     </ScreenContainer>
   );
 };

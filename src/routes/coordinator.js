@@ -20,3 +20,10 @@ export const goToCreatePhotoPage = (history) => {
 };
 
 
+export const goToCreateCollectionPage = (history) => {
+  history.replace("/createcollection");
+};
+
+export const goToCollectionsPage = (history) => {
+  history.replace("/collections");
+};

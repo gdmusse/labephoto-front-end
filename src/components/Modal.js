@@ -70,8 +70,8 @@ const TransitionsModal = () => {
             },
           })
           .then((res) => {
-            setPhoto(res.data.photo[0]);
-            setPhotoDate(dayjs(photo.date).format("DD/MM/YYYY"));
+            setPhoto(res.data.photo);
+            setPhotoDate(dayjs(photo.date).format("DD/MM/YYYY HH:mm"));
             setLoadingModal(false);
           });
       } catch (err) {
@@ -101,7 +101,7 @@ const TransitionsModal = () => {
   return (
     <ScreenContainer>
       <Modal open={openModal} onClose={handleClose} disableScrollLock={true}>
-        <DialogContent disableScrollLock={true}>
+        <DialogContent>
           {" "}
           {loadingModal ? (
             <LoaderDiv>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { InputsContainer, CreatePhotoFormContainer } from "./styled";
+import { InputsContainer, CreateCollectionFormContainer } from "./styled";
 import TextField from "@material-ui/core/TextField";
 import useForm from "../../hooks/useForm";
 import Button from "@material-ui/core/Button";
@@ -12,11 +12,6 @@ import Loader from "../../components/Loader";
 import { makeStyles, withStyles } from "@material-ui/core";
 import styled from "styled-components";
 
-const TagContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-`;
 
 const ImgPreviewContainer = styled.div`
   height: 150px;
@@ -39,63 +34,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreatePhotoForm = () => {
+const CreateCollectionForm = () => {
   const classes = useStyles();
   const history = useHistory();
   const [form, onChange, clear, setForm] = useForm({
+    title: "",
     subtitle: "",
-    file: "",
-    tags: [],
+    iamge: "",
   });
 
   const { setOpenAlert, setAlertMsg, setAlertSeverity, loading, setLoading } =
     useContext(GlobalStateContext);
 
-  const [tagsArray, setTagsArray] = useState([]);
-
   const onSubmitForm = async (event) => {
     event.preventDefault();
-    form.tags = tagsArray;
-    if (form.tags.length !== 0) {
-      createPhoto(form, clear, history);
-      setLoading(true);
-    } else {
-      setAlertMsg("Please input at least one tag");
-      setAlertSeverity("error");
-      setOpenAlert(true);
-    }
-  };
-
-  const onClickTag = (input) => {
-    if (input.length !== 0) {
-      setTagsArray([...tagsArray, input]);
-      setForm({ ...form, tags: [] });
-    } else {
-      setAlertMsg("Please input at least one character");
-      setAlertSeverity("error");
-      setOpenAlert(true);
-    }
-  };
-
-  const onClickResetTags = () => {
-    setTagsArray([]);
-  };
-
-  useEffect(() => {}, [tagsArray]);
-
-  const createPhoto = async (body, clear, history) => {
+    createCollection(form, clear, history);
     setLoading(true);
+  };
 
+  const createCollection = async (body, clear, history) => {
+    setLoading(true);
     try {
       await axios
-        .post(`${BASE_URL}/photo/create`, body, {
+        .post(`${BASE_URL}/collection/create`, body, {
           headers: {
             Authorization: localStorage.getItem("token"),
           },
         })
         .then(() => {
           setLoading(false);
-          setAlertMsg("Photo Created");
+          setAlertMsg("Collection Created");
           setAlertSeverity("success");
           setOpenAlert(true);
           goToFeed(history);
@@ -108,16 +76,30 @@ const CreatePhotoForm = () => {
     }
   };
 
+  useEffect(() => {}, []);
+
   return (
-    <CreatePhotoFormContainer>
+    <CreateCollectionFormContainer>
       {loading ? (
         <Loader />
       ) : (
         <form onSubmit={onSubmitForm}>
           <InputsContainer>
             <TextField
+              name={"title"}
+              value={form.title}
+              onChange={onChange}
+              label={"Title"}
+              variant={"outlined"}
+              fullWidth
+              margin={"normal"}
+              required
+              autoFocus
+              InputProps={{ inputProps: { maxLength: 15 } }}
+            />
+            <TextField
               name={"subtitle"}
-              value={form.subtitle}
+              value={form.Subtitle}
               onChange={onChange}
               label={"Subtitle"}
               variant={"outlined"}
@@ -125,14 +107,12 @@ const CreatePhotoForm = () => {
               margin={"normal"}
               required
               autoFocus
-              InputProps={{ inputProps: { maxLength: 15 } }}
-            
             />
             <TextField
-              name={"file"}
-              value={form.file}
+              name={"image"}
+              value={form.image}
               onChange={onChange}
-              label={"Image url"}
+              label={"Image"}
               variant={"outlined"}
               fullWidth
               margin={"normal"}
@@ -141,40 +121,8 @@ const CreatePhotoForm = () => {
             />
             <ImgPreviewContainer>
               {" "}
-              <ImgPreview src={form.file} />
+              <ImgPreview src={form.image} />
             </ImgPreviewContainer>
-
-            <TagContainer>
-              <TextField
-                name={"tags"}
-                value={form.tags}
-                onChange={onChange}
-                label={"Tags"}
-                variant={"outlined"}
-                fullWidth
-                margin={"normal"}
-                helperText={`tags: ${tagsArray}`}
-              />
-              <Button
-                variant={"contained"}
-                color={"primary"}
-                className={classes.button}
-                onClick={() => onClickTag(form.tags)}
-              >
-                Add Tag
-              </Button>
-
-              <Button
-                variant={"contained"}
-                color={"primary"}
-                className={classes.button}
-                onClick={() => onClickResetTags()}
-              >
-                Reset Tags
-              </Button>
-            </TagContainer>
-
-            
           </InputsContainer>
           <Button
             type={"submit"}
@@ -182,12 +130,12 @@ const CreatePhotoForm = () => {
             variant={"contained"}
             color={"primary"}
           >
-            Create Photo
+            Create Colection
           </Button>
         </form>
       )}
-    </CreatePhotoFormContainer>
+    </CreateCollectionFormContainer>
   );
 };
 
-export default CreatePhotoForm;
+export default CreateCollectionForm;

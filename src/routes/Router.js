@@ -7,6 +7,8 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import Header from "../components/Header/Header.js";
 
 import CreatePhotoPage from "../pages/CreatePostPage/CreatePhotoPage";
+import CreateCollectionPage from "../pages/CreateCollectionPage/CreateCollectionPage";
+import CollectionsPage from "../pages/CollectionsPage/CollectionsPage";
 
 /*
 import PostPage from "../pages/PostPage/PostPage"; 
@@ -32,10 +34,14 @@ const Router = () => {
         <Route exact path="/createphoto">
           <CreatePhotoPage />
         </Route>
-        {/*         
-        <Route exact path="/post/:id">
-          <PostPage />
+        <Route exact path="/createcollection">
+          <CreateCollectionPage />
         </Route>
+        <Route exact path="/collections">
+          <CollectionsPage />
+        </Route>
+        {/*         
+       
       
         <Route>
           <ErrorPage />

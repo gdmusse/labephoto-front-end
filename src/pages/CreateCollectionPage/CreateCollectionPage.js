@@ -3,20 +3,20 @@ import { useContext } from "react";
 import AlertModified from "../../components/Alert";
 import Loader from "../../components/Loader";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { TitleDiv } from "../CreateCollectionPage/styled";
-import { ScreenContainer } from "../CreatePostPage/styled";
-import CreatePhotoForm from "./CreatePhotoForm";
+import { ScreenContainer,TitleDiv } from "../CreateCollectionPage/styled";
+import CreateCollectionForm from "./CreateCollectionForm";
 
-const CreatePhotoPage = () => {
+const CreateCollectionPage = () => {
   const {loading} = useContext(GlobalStateContext)
 
   return (
   <ScreenContainer>
     <AlertModified />
-    <TitleDiv> <Typography variant="h4" color="secondary">Create Photo</Typography></TitleDiv>
-    {loading ? <Loader /> : <CreatePhotoForm />}
+    <TitleDiv> <Typography variant="h4" color="secondary">Create Collection</Typography></TitleDiv>
+   
+    {loading ? <Loader /> : <CreateCollectionForm />}
   </ScreenContainer>
   )
 };
 
-export default CreatePhotoPage;
+export default CreateCollectionPage;
