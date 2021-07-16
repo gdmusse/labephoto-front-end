@@ -1,13 +1,13 @@
 export const goToSignUp = (history) => {
-  history.replace("/signup");
+  history.push("/signup");
 };
 
 export const goToFeed = (history) => {
-  history.replace("/");
+  history.push("/");
 };
 
 export const goToLogin = (history) => {
-  history.replace("/login");
+  history.push("/login");
 };
 
 export const goToPreviousPage = (history) => {
@@ -16,14 +16,18 @@ export const goToPreviousPage = (history) => {
 
 
 export const goToCreatePhotoPage = (history) => {
-  history.replace("/createphoto");
+  history.push("/createphoto");
 };
 
 
 export const goToCreateCollectionPage = (history) => {
-  history.replace("/createcollection");
+  history.push("/createcollection");
 };
 
 export const goToCollectionsPage = (history) => {
-  history.replace("/collections");
+  history.push("/collections");
+};
+
+export const goToCollectionDetailsPage = (history, id) => {
+  history.push(`/collection/${id}`);
 };

@@ -16,32 +16,30 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: "#273E47",
     fontWeight: "bold",
-    ["@media (max-width: 900px)"]: { paddingRight: "50px" },
-    ["@media (max-width: 600px)"]: { paddingRight: "10px" },
-
+    "@media (max-width: 900px)": { paddingRight: "50px" },
+    "@media (max-width: 600px)": { paddingRight: "10px" },
   },
   logo: {
-    ["@media (max-width: 900px)"]: { paddingLeft: "50px" },
-    ["@media (max-width: 600px)"]: { paddingLeft: "10px" },
-
+    "@media (max-width: 900px)": { paddingLeft: "50px" },
+    "@media (max-width: 600px)": { paddingLeft: "10px" },
   },
   bar: {
     boxShadow: "none",
     borderBottom: "1px solid #bbbb",
     margin: "0",
-    padding: "0"
+    padding: "0",
   },
   search: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    ["@media (max-width: 600px)"]: { width: "150px" },
+    "@media (max-width: 600px)": { width: "150px" },
   },
   loginDiv: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
-  }
+  },
 }));
 
 const Header = () => {
@@ -73,43 +71,45 @@ const Header = () => {
   }, [token, setRightButtonText]);
 
   return (
+    <AppBar position="static" className={classes.bar}>
+      <StyledToolbar className={classes.bar}>
+        <AppDiv>
+          <Button
+            onClick={() => goToFeed(history)}
+            color="inherit"
+            className={classes.logo}
+          >
+            <LogoDiv src={logo}></LogoDiv>
+            <LogoDivTwo src={logoloading}></LogoDivTwo>
+          </Button>
+        </AppDiv>
 
-      <AppBar position="static" className={classes.bar}>
-        <StyledToolbar className={classes.bar}>
-          <AppDiv>
-            <Button onClick={() => goToFeed(history)} color="inherit" className={classes.logo}>
-              <LogoDiv src={logo}></LogoDiv>
-              <LogoDivTwo src={logoloading}></LogoDivTwo>
-            </Button>
-          </AppDiv>
+        <AppDiv>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            className={classes.search}
+          />
+        </AppDiv>
 
-          <AppDiv>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              className={classes.search}
-            />
-          </AppDiv>
-
-          <AppDiv className={classes.loginDiv}>
-            <Button
-              onClick={rightButtonAction}
-              color="inherit"
-              className={classes.login}
-            >
-              {rightButtonText}
-            </Button>
-          </AppDiv>
-        </StyledToolbar>
-      </AppBar>
-
+        <AppDiv className={classes.loginDiv}>
+          <Button
+            onClick={rightButtonAction}
+            color="inherit"
+            className={classes.login}
+          >
+            {rightButtonText}
+          </Button>
+        </AppDiv>
+      </StyledToolbar>
+    </AppBar>
   );
 };
 

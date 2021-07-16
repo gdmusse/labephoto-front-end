@@ -7,3 +7,6 @@ export const ScreenContainer = styled.div`
   width: 100vw;
   margin-top: 5vh;
 `;
+export const TitleDiv = styled.div`
+  margin: 2vh 0;
+`;

@@ -4,9 +4,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import GlobalStateContext from "../global/GlobalStateContext";
 
 const AlertModified = () => {
-  const { openAlert, setOpenAlert, alertMsg, alertSeverity } = useContext(
-    GlobalStateContext
-  );
+  const { openAlert, setOpenAlert, alertMsg, alertSeverity } =
+    useContext(GlobalStateContext);
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

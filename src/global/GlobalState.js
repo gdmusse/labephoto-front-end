@@ -12,8 +12,10 @@ const GlobalState = (props) => {
   const [photos, setPhotos] = useState([]);
   const [modalInfo, setModalInfo] = useState("");
   const [loadingModal, setLoadingModal] = useState("");
-/*   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10); */
+  const [collections, setCollections] = useState([]);
+  const [collectionDetails, setCollectionDetails] = useState([]);
+  const [collectionInput, setCollectionInput] = useState("");
+  const [collectionsArray, setCollectionsArray] = useState([]);
 
   return (
     <GlobalStateContext.Provider
@@ -36,11 +38,15 @@ const GlobalState = (props) => {
         modalInfo,
         setModalInfo,
         loadingModal,
-        setLoadingModal
-/*         currentPage,
-        setCurrentPage,
-        postsPerPage,
-        setPostsPerPage, */
+        setLoadingModal,
+        collections,
+        setCollections,
+        collectionDetails,
+        setCollectionDetails,
+        collectionInput,
+        setCollectionInput,
+        collectionsArray,
+        setCollectionsArray,
       }}
     >
       {props.children}

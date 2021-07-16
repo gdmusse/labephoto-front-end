@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png";
 import SignUpForm from "./SignUpForm";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import AlertModified from "../../components/Alert";
-import { goToLogin, goToPreviousPage } from "../../routes/coordinator";
+import { goToLogin } from "../../routes/coordinator";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 

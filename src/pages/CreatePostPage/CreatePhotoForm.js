@@ -9,7 +9,7 @@ import BASE_URL from "../../constants/urls";
 import { goToFeed } from "../../routes/coordinator";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import Loader from "../../components/Loader";
-import { makeStyles, withStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import styled from "styled-components";
 
 const TagContainer = styled.div`
@@ -126,7 +126,6 @@ const CreatePhotoForm = () => {
               required
               autoFocus
               InputProps={{ inputProps: { maxLength: 15 } }}
-            
             />
             <TextField
               name={"file"}
@@ -173,8 +172,6 @@ const CreatePhotoForm = () => {
                 Reset Tags
               </Button>
             </TagContainer>
-
-            
           </InputsContainer>
           <Button
             type={"submit"}

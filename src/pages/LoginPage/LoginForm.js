@@ -9,7 +9,6 @@ import BASE_URL from "../../constants/urls";
 import { goToFeed } from "../../routes/coordinator";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import Loader from "../../components/Loader";
-import { withStyles } from "@material-ui/core";
 
 const LoginForm = () => {
   const history = useHistory();
