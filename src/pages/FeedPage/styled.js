@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Fab from "@material-ui/core/Fab";
-
 
 export const ScreenContainer = styled.div`
   display: flex;
@@ -18,8 +16,7 @@ export const PhotosContainer = styled.div`
   justify-content: center;
 `;
 
-export const ButtonsContainer = styled.div` 
-display: flex;
-justify-content: center;
-
-`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;

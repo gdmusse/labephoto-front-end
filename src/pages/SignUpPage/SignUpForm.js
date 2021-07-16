@@ -9,7 +9,6 @@ import BASE_URL from "../../constants/urls";
 import { goToFeed } from "../../routes/coordinator";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import Loader from "../../components/Loader";
-import { withStyles } from "@material-ui/core";
 
 const SignUpForm = () => {
   const history = useHistory();
@@ -29,9 +28,6 @@ const SignUpForm = () => {
     setLoading(true);
   };
 
-
-
-
   const signUp = (body, clear, history) => {
     setLoading(true);
     axios
@@ -40,7 +36,7 @@ const SignUpForm = () => {
         localStorage.setItem("token", res.data.token);
         clear();
         setLoading(false);
-            goToFeed(history); 
+        goToFeed(history);
       })
       .catch((err) => {
         setLoading(false);
@@ -102,7 +98,11 @@ const SignUpForm = () => {
               type={"password"}
               InputProps={{ inputProps: { minLength: 6 } }}
               error={form.password.length < 6}
-              helperText={form.password.length < 6 ? 'Password must be at least 6 characters' : ' '}
+              helperText={
+                form.password.length < 6
+                  ? "Password must be at least 6 characters"
+                  : " "
+              }
             />
           </InputsContainer>
           <Button

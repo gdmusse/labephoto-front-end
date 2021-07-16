@@ -9,6 +9,7 @@ import Header from "../components/Header/Header.js";
 import CreatePhotoPage from "../pages/CreatePostPage/CreatePhotoPage";
 import CreateCollectionPage from "../pages/CreateCollectionPage/CreateCollectionPage";
 import CollectionsPage from "../pages/CollectionsPage/CollectionsPage";
+import CollectionDetailsPage from "../pages/CollectionDetailsPage/CollectionDetailsPage";
 
 /*
 import PostPage from "../pages/PostPage/PostPage"; 
@@ -39,6 +40,9 @@ const Router = () => {
         </Route>
         <Route exact path="/collections">
           <CollectionsPage />
+        </Route>
+        <Route exact path="/collection/:id">
+          <CollectionDetailsPage />
         </Route>
         {/*         
        

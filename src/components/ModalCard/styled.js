@@ -21,3 +21,10 @@ export const ModalCardContent = styled(CardContent)`
     padding: 10px;
   }
 `;
+
+export const InputsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

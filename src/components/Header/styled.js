@@ -11,21 +11,21 @@ export const StyledToolbar = styled(Toolbar)`
 `;
 
 export const LogoDiv = styled.img`
-display: flex;
-max-height: 64px;
-@media screen and (max-width: 992px) {
+  display: flex;
+  max-height: 64px;
+  @media screen and (max-width: 992px) {
     display: none;
   }
-`
+`;
 
 export const LogoDivTwo = styled.img`
-display: none;
-max-height: 64px;
-@media screen and (max-width: 992px) {
+  display: none;
+  max-height: 64px;
+  @media screen and (max-width: 992px) {
     display: flex;
   }
-`
+`;
 
 export const AppDiv = styled.div`
-width: 33%;
-`
+  width: 33%;
+`;

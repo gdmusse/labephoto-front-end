@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Modal from "@material-ui/core/Modal";
 import DialogContent from "@material-ui/core/DialogContent";
 import GlobalStateContext from "../global/GlobalStateContext";
@@ -10,6 +9,7 @@ import styled from "styled-components";
 import ModalCard from "./ModalCard/ModalCard";
 import dayjs from "dayjs";
 import Loader from "./Loader";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     top: "10vh",
     width: "60vw",
     paddingRight: 0,
-    ["@media (max-width: 900px)"]: { left: "10vw" },
-    ["@media (max-width: 600px)"]: { left: "5vw" },
+    "@media (max-width: 900px)": { left: "10vw" },
+    "@media (max-width: 600px)": { left: "5vw" },
   },
 }));
 
@@ -47,6 +47,10 @@ const TransitionsModal = () => {
     modalInfo,
     loadingModal,
     setLoadingModal,
+    setAlertMsg,
+    setAlertSeverity,
+    setOpenAlert,
+    collectionInput,
   } = useContext(GlobalStateContext);
 
   const [photo, setPhoto] = useState({});
@@ -80,6 +84,39 @@ const TransitionsModal = () => {
     }
   };
 
+  const addPhotoToCollection = async (photo_id, collection_id) => {
+    if (photo_id) {
+      setLoadingModal(true);
+      try {
+        const body = {
+          collection_id: `${collection_id}`,
+        };
+        await axios
+          .post(`${BASE_URL}/photo/${photo_id}`, body, {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            setLoadingModal(false);
+            setAlertMsg("Photo added to collection");
+            setAlertSeverity("success");
+            setOpenAlert(true);
+
+            setOpenModal(false);
+            setModalInfo("");
+            setPhoto({});
+            setPhotoDate("");
+          });
+      } catch (err) {
+        setAlertMsg(err.response.data.error);
+        setAlertSeverity("error");
+        setOpenAlert(true);
+        setLoadingModal(false);
+      }
+    }
+  };
+
   useEffect(() => {
     getPhotoById(modalInfo);
   }, [modalInfo, photoDate]);
@@ -93,7 +130,8 @@ const TransitionsModal = () => {
         author={photo.author}
         createdAt={photoDate}
         tags={photo.tags}
-        collection={photo.collection}
+        collections={photo.collections}
+        onClick={() => addPhotoToCollection(photo.id, collectionInput)}
       ></ModalCard>
     </div>
   );

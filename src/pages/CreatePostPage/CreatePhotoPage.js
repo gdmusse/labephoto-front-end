@@ -8,15 +8,20 @@ import { ScreenContainer } from "../CreatePostPage/styled";
 import CreatePhotoForm from "./CreatePhotoForm";
 
 const CreatePhotoPage = () => {
-  const {loading} = useContext(GlobalStateContext)
+  const { loading } = useContext(GlobalStateContext);
 
   return (
-  <ScreenContainer>
-    <AlertModified />
-    <TitleDiv> <Typography variant="h4" color="secondary">Create Photo</Typography></TitleDiv>
-    {loading ? <Loader /> : <CreatePhotoForm />}
-  </ScreenContainer>
-  )
+    <ScreenContainer>
+      <AlertModified />
+      <TitleDiv>
+        {" "}
+        <Typography variant="h4" color="secondary">
+          Create Photo
+        </Typography>
+      </TitleDiv>
+      {loading ? <Loader /> : <CreatePhotoForm />}
+    </ScreenContainer>
+  );
 };
 
 export default CreatePhotoPage;

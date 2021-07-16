@@ -3,24 +3,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 export const PhotoCardContainer = styled(Card)`
-  width: 20vw;
-  height: 40vh;
+  width: 365px;
+  height: 380px;
   margin-bottom: 5%;
-  @media screen and (max-width: 1500px) {
-    width: 35vw;
-    height: 50vh;
-    max-height: 380px;
-  }
-  @media screen and (max-width: 992px) {
-    height: 50vh;
-    max-height: 380px;
-    width: 50vw;
-  }
-
   @media screen and (max-width: 600px) {
-    width: 90vw;
-    height: 50vh;
-    max-height: 340px;
+    max-width: 90vw;
+    max-height: 330px;
   }
 `;
 
@@ -28,7 +16,6 @@ export const PhotoCardContent = styled(CardContent)`
   display: flex;
   background-color: #d8c99b;
   padding: 0;
-
 `;
 
 export const SubtitleDiv = styled.div`

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { InputsContainer, CreateCollectionFormContainer } from "./styled";
 import TextField from "@material-ui/core/TextField";
 import useForm from "../../hooks/useForm";
@@ -9,9 +9,7 @@ import BASE_URL from "../../constants/urls";
 import { goToFeed } from "../../routes/coordinator";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import Loader from "../../components/Loader";
-import { makeStyles, withStyles } from "@material-ui/core";
 import styled from "styled-components";
-
 
 const ImgPreviewContainer = styled.div`
   height: 150px;
@@ -25,19 +23,10 @@ const ImgPreviewContainer = styled.div`
 const ImgPreview = styled.img`
   object-fit: scale-down;
 `;
-const useStyles = makeStyles((theme) => ({
-  button: {
-    position: "relative",
-    bottom: "7.5px",
-    marginLeft: "1vw",
-    height: "50px",
-  },
-}));
 
 const CreateCollectionForm = () => {
-  const classes = useStyles();
   const history = useHistory();
-  const [form, onChange, clear, setForm] = useForm({
+  const [form, onChange, clear] = useForm({
     title: "",
     subtitle: "",
     iamge: "",
@@ -112,11 +101,10 @@ const CreateCollectionForm = () => {
               name={"image"}
               value={form.image}
               onChange={onChange}
-              label={"Image"}
+              label={"Image url"}
               variant={"outlined"}
               fullWidth
               margin={"normal"}
-              required
               autoFocus
             />
             <ImgPreviewContainer>
