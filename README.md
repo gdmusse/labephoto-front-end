@@ -21,21 +21,24 @@
 
 
 ### Prints 🎨
-![image](https://user-images.githubusercontent.com/60359003/125125063-76263680-e0cf-11eb-85ca-108a5e21b610.png)
+![image](https://user-images.githubusercontent.com/60359003/126048578-04ab2f64-9992-4dc4-bdcc-17911df99ee3.png)
 
 
 ***
-
-![image](https://user-images.githubusercontent.com/60359003/125125080-7cb4ae00-e0cf-11eb-8426-7be3880c2a41.png)
-
-***
-
-![image](https://user-images.githubusercontent.com/60359003/125125117-8b02ca00-e0cf-11eb-808f-4394513f0ff7.png)
+![image](https://user-images.githubusercontent.com/60359003/126048586-af369e44-e4b6-4d40-8705-a9ebe1f60d5a.png)
 
 ***
 
-![image](https://user-images.githubusercontent.com/60359003/125125140-90f8ab00-e0cf-11eb-8ecb-6198b0eaca1a.png)
+![image](https://user-images.githubusercontent.com/60359003/126048591-ed443eb7-df47-4fc0-8e09-7f83c4e50b50.png)
 
 ***
+![image](https://user-images.githubusercontent.com/60359003/126048594-a67a3ad7-fa1c-4f62-8404-751f9fcd4873.png)
 
-![image](https://user-images.githubusercontent.com/60359003/125125166-9950e600-e0cf-11eb-80a3-abcb1c1d8f8c.png)
+***
+![image](https://user-images.githubusercontent.com/60359003/126048601-fc783e38-04fd-4224-9806-24d51296c8b6.png)
+
+***
+![image](https://user-images.githubusercontent.com/60359003/126048605-b962daa9-28d9-4183-8002-dee9b8dab93e.png)
+
+
+
