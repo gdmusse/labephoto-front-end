@@ -14,6 +14,10 @@
 - [x] Home com a lista de fotos e modais em cada foto
 - [x] Criação de novas fotos com preview de imagem e tags
 - [x] Loading personalizado
+- [x] Criação de coleções
+- [x] Adicionar fotos as coleções
+- [x] Busca por autor, subtitulo e tags
+- [x] Mobile friendly
 
 
 ### Prints 🎨
