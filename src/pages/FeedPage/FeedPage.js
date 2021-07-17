@@ -114,7 +114,7 @@ const FeedPage = () => {
 
   useEffect(() => {
     setCollectionsArray([]);
-    collections.map((collection) => {
+    collections && collections.map((collection) => {
       const newCollection = {
         value: `${collection.id}`,
         label: `${collection.title}`,

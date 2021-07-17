@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchPage = () => {
-  useProtectedPage()
+  useProtectedPage();
   const params = useParams();
   const history = useHistory();
   const {
@@ -67,16 +67,18 @@ const SearchPage = () => {
 
   const getPhotos = async () => {
     try {
-      const searchParams = params.search.includes("insubtitle")? {subtitle: `${params.search.split("insubtitle")[0]}`}
-      : params.search.includes("inauthor")? {author: `${params.search.split("inauthor")[0]}`} 
-      : {tag: `${params.search.split("intags")[0]}`} 
-      
+      const searchParams = params.search.includes("insubtitle")
+        ? { subtitle: `${params.search.split("insubtitle")[0]}` }
+        : params.search.includes("inauthor")
+        ? { author: `${params.search.split("inauthor")[0]}` }
+        : { tag: `${params.search.split("intags")[0]}` };
+
       await axios
         .get(`${BASE_URL}/photo/search`, {
           headers: {
             Authorization: localStorage.getItem("token"),
-          }, 
-          params: searchParams
+          },
+          params: searchParams,
         })
         .then((res) => {
           setPhotos(res.data.photo);
@@ -121,17 +123,18 @@ const SearchPage = () => {
 
   useEffect(() => {
     setCollectionsArray([]);
-    collections.map((collection) => {
-      const newCollection = {
-        value: `${collection.id}`,
-        label: `${collection.title}`,
-      };
-      setCollectionsArray((collectionsArray) => [
-        ...collectionsArray,
-        newCollection,
-      ]);
-      return null;
-    });
+    collections &&
+      collections.map((collection) => {
+        const newCollection = {
+          value: `${collection.id}`,
+          label: `${collection.title}`,
+        };
+        setCollectionsArray((collectionsArray) => [
+          ...collectionsArray,
+          newCollection,
+        ]);
+        return null;
+      });
   }, [collections]);
 
   const onClickModal = (id) => {
@@ -139,23 +142,28 @@ const SearchPage = () => {
     setModalInfo(id);
   };
 
-  const photoCards = photos.length > 0 ? (photos.sort((a, b) => {
-    const date1 = dayjs(a.date);
-    const date2 = dayjs(b.date);
-    return date2 - date1;
-  })
-  .map((photo) => {
-    return (
-      <PhotoCard
-        key={photo.id}
-        subtitle={photo.subtitle}
-        image={photo.file}
-        author={photo.author}
-        onClickCard={() => onClickModal(photo.id)}
-      />
+  const photoCards =
+    photos.length > 0 ? (
+      photos
+        .sort((a, b) => {
+          const date1 = dayjs(a.date);
+          const date2 = dayjs(b.date);
+          return date2 - date1;
+        })
+        .map((photo) => {
+          return (
+            <PhotoCard
+              key={photo.id}
+              subtitle={photo.subtitle}
+              image={photo.file}
+              author={photo.author}
+              onClickCard={() => onClickModal(photo.id)}
+            />
+          );
+        })
+    ) : (
+      <div>Sorry! No photo was found.</div>
     );
-  })) : (<div>Sorry! No photo was found.</div>)
-   
 
   return (
     <ScreenContainer>
