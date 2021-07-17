@@ -11,6 +11,8 @@ import CreateCollectionPage from "../pages/CreateCollectionPage/CreateCollection
 import CollectionsPage from "../pages/CollectionsPage/CollectionsPage";
 import CollectionDetailsPage from "../pages/CollectionDetailsPage/CollectionDetailsPage";
 
+import SearchPage from "../pages/SearchPage/SearchPage";
+
 /*
 import PostPage from "../pages/PostPage/PostPage"; 
 
@@ -43,6 +45,9 @@ const Router = () => {
         </Route>
         <Route exact path="/collection/:id">
           <CollectionDetailsPage />
+        </Route>
+        <Route exact path="/search/:search">
+          <SearchPage />
         </Route>
         {/*         
        

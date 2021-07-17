@@ -1,15 +1,22 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import { AppDiv, LogoDiv, LogoDivTwo, StyledToolbar } from "./styled";
-import { goToFeed, goToLogin } from "../../routes/coordinator";
+import {
+  AppDiv,
+  LogoDiv,
+  LogoDivTwo,
+  SearchDiv,
+  StyledToolbar,
+} from "./styled";
+import { goToFeed, goToLogin, goToSearchPage } from "../../routes/coordinator";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import logoloading from "../../assets/images/logoloading.png";
-import { makeStyles, TextField } from "@material-ui/core";
+import { IconButton, makeStyles, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { Autocomplete } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   login: {
@@ -45,8 +52,22 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const history = useHistory();
   const classes = useStyles();
-  const { rightButtonText, setRightButtonText, token } =
-    useContext(GlobalStateContext);
+  const {
+    rightButtonText,
+    setRightButtonText,
+    token,
+    setOpenAlert,
+    setAlertMsg,
+    setAlertSeverity,
+  } = useContext(GlobalStateContext);
+  const [searchValue, setSearchValue] = useState("");
+
+  const options = [
+    `${searchValue} in subtitle`,
+    `${searchValue} in author`,
+    `${searchValue} in tags`,
+  ];
+  const [value, setValue] = useState("");
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -70,6 +91,23 @@ const Header = () => {
     }
   }, [token, setRightButtonText]);
 
+  const onChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const goToSearchPageFunction = () => {
+    if (value.length > 0) {
+      const valueNew = value.replace(/ /g, "");
+      setValue("");
+      setSearchValue("");
+      goToSearchPage(history, valueNew);
+    } else {
+      setAlertMsg("Please input at least 1 character and category to search");
+      setAlertSeverity("error");
+      setOpenAlert(true);
+    }
+  };
+
   return (
     <AppBar position="static" className={classes.bar}>
       <StyledToolbar className={classes.bar}>
@@ -85,18 +123,70 @@ const Header = () => {
         </AppDiv>
 
         <AppDiv>
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            className={classes.search}
-          />
+          {token ? (
+            <SearchDiv>
+              <Autocomplete
+                id="free-solo-demo"
+                freeSolo
+                options={options}
+                className={classes.search}
+                fullWidth
+                disableClearable
+                forcePopupIcon={false}
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Search"
+                    onChange={onChange}
+                    margin="normal"
+                    variant="outlined"
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="search"
+                            onClick={goToSearchPageFunction}
+                            edge="end"
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  /* <TextField
+                    {...params}
+                    id="outlined-basic"
+                    variant="outlined"
+                    onChange={onChange}
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="search"
+                            onClick={() => goToSearchPageFunction()}
+                            edge="end"
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  /> */
+                )}
+              ></Autocomplete>
+            </SearchDiv>
+          ) : (
+            <div></div>
+          )}
         </AppDiv>
 
         <AppDiv className={classes.loginDiv}>
