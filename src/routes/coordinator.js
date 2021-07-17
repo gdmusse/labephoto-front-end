@@ -14,11 +14,9 @@ export const goToPreviousPage = (history) => {
   history.goBack();
 };
 
-
 export const goToCreatePhotoPage = (history) => {
   history.push("/createphoto");
 };
-
 
 export const goToCreateCollectionPage = (history) => {
   history.push("/createcollection");
@@ -31,3 +29,7 @@ export const goToCollectionsPage = (history) => {
 export const goToCollectionDetailsPage = (history, id) => {
   history.push(`/collection/${id}`);
 };
+
+export const goToSearchPage = (history, search) => {
+  history.push(`/search/${search}`);
+}

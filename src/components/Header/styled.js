@@ -29,3 +29,9 @@ export const LogoDivTwo = styled.img`
 export const AppDiv = styled.div`
   width: 33%;
 `;
+
+
+export const SearchDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
