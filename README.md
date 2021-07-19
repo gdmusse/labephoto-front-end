@@ -5,8 +5,7 @@
 </div> 
 &nbsp
 <p align="center">Link do Surge: http://labephoto-musse.surge.sh/</p>
-<p align="center">OBS: Se o site fica muito tempo sem requisição, o heroku entra em standby, por favor fazer logout e login novamente.</p>
-
+<p align="center">OBS: Se o site fica muito tempo sem requisição, o heroku entra em standby, por favor esperar.
 
 ### Funcionamento 🛠
 
