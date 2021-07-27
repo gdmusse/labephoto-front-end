@@ -1,5 +1,5 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-import { primaryColor, neutralColor } from "./colors";
+import { primaryColor, neutralColor, deleteColor } from "./colors";
 
 const theme2 = createMuiTheme({
   palette: {
