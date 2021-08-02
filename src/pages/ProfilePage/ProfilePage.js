@@ -8,11 +8,11 @@ import BASE_URL from "../../constants/urls";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { goToLogin } from "../../routes/coordinator";
 import Loader from "../../components/Loader";
-import PhotoCard from "../../components/PhotoCard/PhotoCard";
 import dayjs from "dayjs";
 import TransitionsModal from "../../components/Modal";
 import jwt from "jsonwebtoken";
 import { Typography } from "@material-ui/core";
+import PhotoCardEdit from "../../components/PhotoCardEdit/PhotoCardEdit";
 const ProfilePage = () => {
   useProtectedPage();
   const history = useHistory();
@@ -123,7 +123,7 @@ const ProfilePage = () => {
       })
       .map((photo) => {
         return (
-          <PhotoCard
+          <PhotoCardEdit
             key={photo.id}
             subtitle={photo.subtitle}
             image={photo.file}
