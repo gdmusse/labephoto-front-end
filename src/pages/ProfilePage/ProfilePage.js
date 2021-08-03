@@ -13,6 +13,7 @@ import TransitionsModal from "../../components/Modal";
 import jwt from "jsonwebtoken";
 import { Typography } from "@material-ui/core";
 import PhotoCardEdit from "../../components/PhotoCardEdit/PhotoCardEdit";
+
 const ProfilePage = () => {
   useProtectedPage();
   const history = useHistory();
@@ -113,6 +114,33 @@ const ProfilePage = () => {
     setModalInfo(id);
   };
 
+  const removePhoto = async (id) => {
+    try {
+      await axios
+        .delete(`${BASE_URL}/photo/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setAlertMsg("Photo deleted successfully");
+          setAlertSeverity("success");
+          setOpenAlert(true);
+          getPhotos();
+        });
+    } catch (err) {
+      if (err.response && err.response.data.error.includes("jwt expired")) {
+        setAlertMsg(err.response.data.error);
+        setAlertSeverity("error");
+        setOpenAlert(true);
+      } else {
+        console.log("err", err);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const photoCards =
     profilePhotos &&
     profilePhotos
@@ -129,12 +157,14 @@ const ProfilePage = () => {
             image={photo.file}
             author={photo.author}
             onClickCard={() => onClickModal(photo.id)}
+            onClickRemove={() => removePhoto(photo.id)}
           />
         );
       });
 
   return (
     <ScreenContainer>
+      <AlertModified />
       <TitleDiv>
         <Typography variant="h4" color="secondary">
           My Photos
@@ -143,7 +173,7 @@ const ProfilePage = () => {
 
       <PhotosContainer>
         <TransitionsModal />
-        <AlertModified />
+
         {loading ? <Loader /> : <div>{photoCards}</div>}
       </PhotosContainer>
     </ScreenContainer>

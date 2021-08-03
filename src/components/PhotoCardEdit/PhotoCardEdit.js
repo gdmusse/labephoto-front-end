@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     outline: "1px solid grey",
     outlineOffset: "1px",
   },
+  removeButton: {
+    backgroundColor: "#bf3732",
+    "&:hover": {
+      background: "#9b2b27",
+    },
+  },
 }));
 
 const PhotoCardEdit = (props) => {
@@ -53,8 +59,10 @@ const PhotoCardEdit = (props) => {
           color="primary"
           size="small"
           disableElevation={true}
+          className={classes.removeButton}
+          onClick={props.onClickRemove}
         >
-          Edit Photo
+          Remove Photo
         </Button>
       </ButtonDiv>
     </div>
