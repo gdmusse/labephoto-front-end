@@ -6,8 +6,10 @@ import GlobalStateContext from "../../global/GlobalStateContext";
 import { TitleDiv } from "../CreateCollectionPage/styled";
 import { ScreenContainer } from "../CreatePostPage/styled";
 import CreatePhotoForm from "./CreatePhotoForm";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 const CreatePhotoPage = () => {
+  useProtectedPage();
   const { loading } = useContext(GlobalStateContext);
 
   return (

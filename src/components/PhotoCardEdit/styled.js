@@ -28,7 +28,7 @@ export const SubtitleDiv = styled.div`
   padding: 3%;
   padding-top: 1%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #bd632f;
 
   @media screen and (max-width: 992px) {
@@ -39,3 +39,10 @@ export const SubtitleDiv = styled.div`
     align-items: flex-start;
   }
 `;
+
+export const ButtonDiv = styled.div`
+  display: flex;
+  margin-bottom: 5%;
+  align-items: center;
+  justify-content: center;
+`

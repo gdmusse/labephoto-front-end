@@ -76,6 +76,7 @@ const FeedPage = () => {
         });
     } catch (err) {
       if (err.response && err.response.data.error.includes("jwt expired")) {
+        localStorage.removeItem("token");
         setAlertMsg(err.response.data.error);
         setAlertSeverity("error");
         setOpenAlert(true);
@@ -132,7 +133,7 @@ const FeedPage = () => {
     setModalInfo(id);
   };
 
-  const photoCards = photos
+  const photoCards = photos.length > 0 ? (photos
     .sort((a, b) => {
       const date1 = dayjs(a.date);
       const date2 = dayjs(b.date);
@@ -148,7 +149,9 @@ const FeedPage = () => {
           onClickCard={() => onClickModal(photo.id)}
         />
       );
-    });
+    })) : (
+      <div>Sorry! No photos were found.</div>
+    );
 
   return (
     <ScreenContainer>

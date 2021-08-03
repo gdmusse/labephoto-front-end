@@ -7,3 +7,10 @@ export const ScreenContainer = styled.div`
   width: 100vw;
   margin-top: 5vh;
 `;
+
+export const DeleteButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+`

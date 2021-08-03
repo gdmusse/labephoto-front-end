@@ -33,3 +33,7 @@ export const goToCollectionDetailsPage = (history, id) => {
 export const goToSearchPage = (history, search) => {
   history.push(`/search/${search}`);
 }
+
+export const goToProfilePage = (history) => {
+  history.push("/profile");
+};

@@ -5,8 +5,10 @@ import Loader from "../../components/Loader";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { ScreenContainer, TitleDiv } from "../CreateCollectionPage/styled";
 import CreateCollectionForm from "./CreateCollectionForm";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 const CreateCollectionPage = () => {
+  useProtectedPage();
   const { loading } = useContext(GlobalStateContext);
 
   return (

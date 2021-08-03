@@ -9,7 +9,12 @@ import {
   SearchDiv,
   StyledToolbar,
 } from "./styled";
-import { goToFeed, goToLogin, goToSearchPage } from "../../routes/coordinator";
+import {
+  goToFeed,
+  goToLogin,
+  goToProfilePage,
+  goToSearchPage,
+} from "../../routes/coordinator";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import logoloading from "../../assets/images/logoloading.png";
@@ -17,6 +22,7 @@ import { IconButton, makeStyles, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Autocomplete } from "@material-ui/lab";
+import { AccountCircle } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   login: {
@@ -59,6 +65,8 @@ const Header = () => {
     setOpenAlert,
     setAlertMsg,
     setAlertSeverity,
+    setLogged,
+    logged,
   } = useContext(GlobalStateContext);
   const [searchValue, setSearchValue] = useState("");
 
@@ -86,8 +94,10 @@ const Header = () => {
   useEffect(() => {
     if (token) {
       setRightButtonText("Logout");
+      setLogged(true);
     } else {
       setRightButtonText("Login");
+      setLogged(false);
     }
   }, [token, setRightButtonText]);
 
@@ -160,27 +170,6 @@ const Header = () => {
                       ),
                     }}
                   />
-                  /* <TextField
-                    {...params}
-                    id="outlined-basic"
-                    variant="outlined"
-                    onChange={onChange}
-                    InputProps={{
-                      ...params.InputProps,
-                      type: "search",
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="search"
-                            onClick={() => goToSearchPageFunction()}
-                            edge="end"
-                          >
-                            <SearchIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  /> */
                 )}
               ></Autocomplete>
             </SearchDiv>
@@ -190,6 +179,14 @@ const Header = () => {
         </AppDiv>
 
         <AppDiv className={classes.loginDiv}>
+          {logged ? (
+            <Button onClick={() => goToProfilePage(history)}>
+              <AccountCircle />
+            </Button>
+          ) : (
+            <div></div>
+          )}
+
           <Button
             onClick={rightButtonAction}
             color="inherit"

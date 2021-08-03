@@ -16,6 +16,8 @@ const GlobalState = (props) => {
   const [collectionDetails, setCollectionDetails] = useState([]);
   const [collectionInput, setCollectionInput] = useState("");
   const [collectionsArray, setCollectionsArray] = useState([]);
+  const [logged, setLogged] = useState(false);
+  const [profilePhotos, setProfilePhotos] = useState([]);
 
   return (
     <GlobalStateContext.Provider
@@ -47,6 +49,10 @@ const GlobalState = (props) => {
         setCollectionInput,
         collectionsArray,
         setCollectionsArray,
+        logged,
+        setLogged,
+        profilePhotos,
+        setProfilePhotos,
       }}
     >
       {props.children}
