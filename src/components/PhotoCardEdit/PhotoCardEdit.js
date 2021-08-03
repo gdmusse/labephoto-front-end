@@ -62,7 +62,7 @@ const PhotoCardEdit = (props) => {
           className={classes.removeButton}
           onClick={props.onClickRemove}
         >
-          Remove Photo
+          Delete Photo
         </Button>
       </ButtonDiv>
     </div>

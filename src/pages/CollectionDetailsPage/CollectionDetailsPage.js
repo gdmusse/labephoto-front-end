@@ -7,16 +7,28 @@ import BASE_URL from "../../constants/urls";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { goToLogin } from "../../routes/coordinator";
-import { ScreenContainer, TitleDiv } from "./styled";
+import { ButtonDiv, ScreenContainer, TitleDiv } from "./styled";
 import Loader from "../../components/Loader";
 import PhotoCard from "../../components/PhotoCard/PhotoCard";
 import TransitionsModal from "../../components/Modal";
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import AlertModified from "../../components/Alert";
+
+const useStyles = makeStyles((theme) => ({
+  removeButton: {
+    backgroundColor: "#bf3732",
+    "&:hover": {
+      background: "#9b2b27",
+    },
+  },
+}));
 
 const CollectionDetailsPage = () => {
   useProtectedPage();
 
   const params = useParams();
+  const classes = useStyles();
 
   const history = useHistory();
   const {
@@ -68,6 +80,33 @@ const CollectionDetailsPage = () => {
     setModalInfo(id);
   };
 
+  const removePhotoFromCollection = async (id) => {
+    try {
+      await axios
+        .delete(`${BASE_URL}/photo/${params.id}/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setAlertMsg("Photo removed from collection successfully");
+          setAlertSeverity("success");
+          setOpenAlert(true);
+          getCollectionDetails();
+        });
+    } catch (err) {
+      if (err.response && err.response.data.error.includes("jwt expired")) {
+        setAlertMsg(err.response.data.error);
+        setAlertSeverity("error");
+        setOpenAlert(true);
+      } else {
+        console.log("err", err);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const collectionCards = collectionDetails
     .sort((a, b) => {
       const date1 = dayjs(a.date);
@@ -76,13 +115,29 @@ const CollectionDetailsPage = () => {
     })
     .map((photo) => {
       return (
-        <PhotoCard
-          key={photo.photo_id}
-          subtitle={photo.subtitle}
-          image={photo.file}
-          author={photo.author}
-          onClickCard={() => onClickModal(photo.photo_id)}
-        />
+        <div>
+          <PhotoCard
+            key={photo.photo_id}
+            subtitle={photo.subtitle}
+            image={photo.file}
+            author={photo.author}
+            onClickCard={() => onClickModal(photo.photo_id)}
+          />
+
+          <ButtonDiv>
+            {" "}
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              disableElevation={true}
+              className={classes.removeButton}
+              onClick={() => removePhotoFromCollection(photo.photo_id)}
+            >
+              Remove Photo
+            </Button>
+          </ButtonDiv>
+        </div>
       );
     });
 
@@ -103,6 +158,7 @@ const CollectionDetailsPage = () => {
             <div>No photo was added to this collection yet.</div>
           )}
           {collectionCards}
+          <AlertModified />
         </div>
       )}
       <TransitionsModal></TransitionsModal>

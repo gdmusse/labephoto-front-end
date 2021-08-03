@@ -6,6 +6,10 @@ export const PhotoCardContainer = styled(Card)`
   width: 365px;
   height: 380px;
   margin-bottom: 5%;
+  transition: transform .2s;
+  &:hover {
+    transform: scale(1.02);
+  }
   @media screen and (max-width: 600px) {
     max-width: 90vw;
     max-height: 330px;
